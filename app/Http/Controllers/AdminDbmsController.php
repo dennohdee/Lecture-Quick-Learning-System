@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\lessons;
 
-class DbmsController extends Controller
+class AdminDbmsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,14 +14,14 @@ class DbmsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth:admin');
         
     }
     public function index()
     {
         //
         $dbmslesson=lessons::all()->where('unit_id', '=', '4');
-        return view('dbms.index',compact('dbmslesson'));
+        return view('admindbms.index',compact('dbmslesson'));
     }
 
     /**
@@ -32,6 +32,7 @@ class DbmsController extends Controller
     public function create()
     {
         //
+        return view('admindbms.create');
     }
 
     /**

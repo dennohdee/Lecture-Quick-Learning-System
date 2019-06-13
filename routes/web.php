@@ -48,6 +48,11 @@ Route::resource('knowledgemanagement', 'KnowledgeManagementController');
 Route::put('/profile', 'profileController@update');
 Route::prefix('admin')->group(function () {
     Route::get('/admin', 'AdminController@index')->name('admin.dashboard');
+    Route::get('/admin-quicklearning', 'AdminQuickLearningController@adminquicklearning')->name('adminquicklearning');
+    Route::resource('adminnetadmin', 'AdminNetAdminController');
+    Route::resource('adminsysadmin', 'AdminSysAdminController');
+    Route::resource('admindbms', 'AdminDbmsController');
+    Route::resource('adminknowledgemanagement', 'AdminKnowledgeManagementController');
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
 });

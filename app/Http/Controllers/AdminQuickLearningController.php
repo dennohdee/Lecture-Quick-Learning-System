@@ -3,25 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\lessons;
 
-class DbmsController extends Controller
+class AdminQuickLearningController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-        
-    }
-    public function index()
+    public function adminquicklearning()
     {
         //
-        $dbmslesson=lessons::all()->where('unit_id', '=', '4');
-        return view('dbms.index',compact('dbmslesson'));
+        return view('admin-quicklearning');
     }
 
     /**
@@ -54,8 +47,6 @@ class DbmsController extends Controller
     public function show($id)
     {
         //
-        $dbmslesson=lessons::find($id);
-        return view('dbms.details', compact('dbmslesson'));
     }
 
     /**

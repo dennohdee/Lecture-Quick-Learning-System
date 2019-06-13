@@ -1,9 +1,11 @@
-@extends('layouts.master')
+@extends('layouts.app')
 @section('content')
 <div class="container">
 <h2>Network Administration Lessons</h2>
+<a class="btn btn-sm btn-info" href="{{ route('adminnetadmin.create')}}">Add Lesson</a><a class="pull-right btn btn-sm btn-danger" href="{{ route('adminquicklearning')}}">Go Back</a>
 <div class="row">
 @if(count($netlesson)>0)
+
 @foreach($netlesson as $netlesson)
 <script type="text/javascript">
       function getAll(){
@@ -17,7 +19,7 @@
       </script>
   <div class="col-md-6">
 <div class="box box-warning box-solid">
-            <div class="box-header with-border">
+            <div class="box-header with-border">            
               <h3 class="box-title">Lesson No {{$netlesson->lessonNo}}</h3>
 
               <div class="box-tools pull-right">
@@ -32,12 +34,10 @@
             {!! $netlesson->objectives!!}
             <h3>Content</h3>
             
-            <div id="def" style="display:block">{!! str_limit($netlesson->content, 300) !!} <a href="{{ route('netadmin.show', $netlesson->id)}}">...Show More</a></div>
-             @if ( Auth::user()->isAdmin )
-            <div><a href="">Edit</a></div>
-            @else
-            &nbsp;
-            @endif
+            <div id="def" style="display:block">{!! str_limit($netlesson->content, 300) !!} <a class="btn btn-sm btn-info" href="{{ route('adminnetadmin.show', $netlesson->id)}}">...Show More</a></div>
+             
+            <div><a class="btn btn-sm btn-warning" href="{{ route('adminnetadmin.edit', $netlesson->id)}}">Edit Lesson</a></div>
+           
             <h3>Download PDF</h3>
               <a href="/files/{{$netlesson->file}}" >{{$netlesson->file}}</a>
             </div>

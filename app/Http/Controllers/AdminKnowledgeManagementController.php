@@ -5,23 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\lessons;
 
-class DbmsController extends Controller
+class AdminKnowledgeManagementController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-        
-    }
     public function index()
     {
         //
-        $dbmslesson=lessons::all()->where('unit_id', '=', '4');
-        return view('dbms.index',compact('dbmslesson'));
+        $kmlesson=lessons::all()->where('unit_id', '=', '3');
+        return view('adminknowledgemanagement.index',compact('kmlesson'));
     }
 
     /**
@@ -32,6 +31,7 @@ class DbmsController extends Controller
     public function create()
     {
         //
+        return view('adminknowledgemanagement.create');
     }
 
     /**
@@ -51,11 +51,11 @@ class DbmsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
         //
-        $dbmslesson=lessons::find($id);
-        return view('dbms.details', compact('dbmslesson'));
+        $kmlesson=lessons::find($id);
+        return view('knowledgemanagement.details', compact('kmlesson'));
     }
 
     /**

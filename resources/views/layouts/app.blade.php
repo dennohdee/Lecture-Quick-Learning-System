@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{{ config('app.name', 'Lugulu Friends School') }}</title>
+  <title>Staff | {{ config('app.name', 'SCAI::Quick Learning System') }}</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -29,14 +29,14 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic') }}">
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
-<body class="hold-transition skin-blue layout-top-nav">
+<body class="hold-transition skin-blue layout-top-nav layout-boxed">
 <div class="wrapper">
 
-  <header class="main-header">
-    <nav class="navbar navbar-static-top">
+  <header class="main-header" style="background:#2349b2">
+    <nav class="navbar navbar-static-top" style="background:#2349b2">
       <div class="container">
         <div class="navbar-header">
-          <a href="{{ route('home')}}" class="navbar-brand"><b>Admin</b>LTE</a>
+          <a href="/" class="navbar-brand"><b>SCAI</b>QL</a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
@@ -45,20 +45,16 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Link</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-                <li class="divider"></li>
-                <li><a href="#">One more separated link</a></li>
+            <li class="active"><a href="/admin">Home <span class="sr-only">(current)</span></a></li>
+              <li class="dropdown" style="background:#2349b2">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu" style="background:#2349b2">
+                <li style="color:#fff"><a href="{{route ('adminquicklearning')}}">Quick Learning</a></li><li class="divider"></li>
+                <li style="color:#fff"><a href="http://projectkibuinformatics.epizy.com/wp/">Informatics Club</a></li>
+               
               </ul>
             </li>
+                <li><a href="{{route ('about')}}">About Us</a></li>
           </ul>
           <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
@@ -68,74 +64,66 @@
         </div>
         <!-- /.navbar-collapse -->
         <!-- Navbar Right Menu -->
-        <div class="navbar-custom-menu">
-          <ul class="nav navbar-nav">
-            
-            <!-- User Account Menu -->
-            <li class="dropdown user user-menu">
-              <!-- Menu Toggle Button -->
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <!-- The user image in the navbar-->
-                <img src="{{ asset('/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
-                <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                <span class="hidden-xs">Alexander Pierce</span>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- The user image in the menu -->
-                <li class="user-header">
-                  <img src="{{ asset('/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+       
 
-                  <p>
-                    {{ Auth}}
-                    <small>Member since Nov. 2012</small>
-                  </p>
-                </li>
-                <!-- Menu Body -->
-                <li class="user-body">
-                  <div class="row">
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Followers</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Sales</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Friends</a>
-                    </div>
-                  </div>
-                  <!-- /.row -->
-                </li>
-                <!-- Menu Footer-->
-                <li class="user-footer">
-                  <div class="pull-left">
-                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                  </div>
-                  <div class="pull-right">
-                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                  </div>
-                </li>
-              </ul>
-            </li>
+    
+        <div class="navbar-custom-menu">
+           @guest
+           <ul class="nav navbar-nav">
+           <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                @if (Route::has('register'))
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                @endif
+                            </li>
+             </ul>
+
+               @else
+           <ul class="nav navbar-nav" role="menu">
+           <li class="dropdown">
+           <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }} <span class="caret"></span></a>
+
+                                <ul class="dropdown-menu" role="menu" style="background:#2349b2;">
+                                <li style="color:#fff"><a class="dropdown-item" href="{{ route('profile') }}">My Profile</a></li><li class="divider"></li>
+                                    <li style="color:#fff"><a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a></li>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </ul>
+                            </li>
           </ul>
+          @endguest
         </div>
         <!-- /.navbar-custom-menu -->
       </div>
       <!-- /.container-fluid -->
     </nav>
+    
   </header>
   <!-- Full Width Column -->
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" style="background:#fff">
+  
+      <p style="background:#fff"><img class="img-responsive pad" src="{{ asset('/img/scai-logo.png') }}"style="background:#fff" alt="Logo"></p>
+      <hr />
   @yield('content')
   </div>
+  
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="container">
       <div class="pull-right hidden-xs">
-        <b>Version</b> 1.20
+        <b>All rights
+      reserved.</b>
       </div>
-      <strong>Copyright &copy; 2019 <a href="https://adminlte.io">RabbitTech</a>.</strong> All rights
-      reserved.
+      <strong>Copyright &copy;  <a href="https://scai.kibu.ac.ke">SCAI </a></strong>2019 
     </div>
     <!-- /.container -->
   </footer>
@@ -156,5 +144,7 @@
 <script src="/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/js/demo.js"></script>
+<!-- iCheck -->
+<script src="/plugins/iCheck/icheck.min.js"></script>
 </body>
 </html>

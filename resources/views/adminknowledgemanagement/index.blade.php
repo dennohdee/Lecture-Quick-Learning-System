@@ -1,10 +1,11 @@
-@extends('layouts.master')
+@extends('layouts.app')
 @section('content')
 <div class="container">
-<h2>Network Administration Lessons</h2>
+<h2>Knowledge Management Lessons</h2>
+<a class="btn btn-sm btn-info" href="{{ route('adminknowledgemanagement.create')}}">Add Lesson</a><a class="pull-right btn btn-sm btn-danger" href="{{ route('adminquicklearning')}}">Go Back</a>
 <div class="row">
-@if(count($netlesson)>0)
-@foreach($netlesson as $netlesson)
+@if(count($kmlesson)>0)
+@foreach($kmlesson as $kmlesson)
 <script type="text/javascript">
       function getAll(){
         document.getElementById('def').style.display="none";
@@ -18,7 +19,7 @@
   <div class="col-md-6">
 <div class="box box-warning box-solid">
             <div class="box-header with-border">
-              <h3 class="box-title">Lesson No {{$netlesson->lessonNo}}</h3>
+              <h3 class="box-title">Lesson No {{$kmlesson->lessonNo}}</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -29,17 +30,15 @@
             <!-- /.box-header -->
             <div class="box-body">
             <h3>Objectives</h3>
-            {!! $netlesson->objectives!!}
+            {!! $kmlesson->objectives!!}
             <h3>Content</h3>
             
-            <div id="def" style="display:block">{!! str_limit($netlesson->content, 300) !!} <a href="{{ route('netadmin.show', $netlesson->id)}}">...Show More</a></div>
-             @if ( Auth::user()->isAdmin )
-            <div><a href="">Edit</a></div>
-            @else
-            &nbsp;
-            @endif
-            <h3>Download PDF</h3>
-              <a href="/files/{{$netlesson->file}}" >{{$netlesson->file}}</a>
+            <div>{!! str_limit($kmlesson->content, 300) !!} 
+             <a class="btn btn-sm btn-info" class="btn btn-sm btn-info" href="{{ route('adminknowledgemanagement.show', $netlesson->id)}}">...Show More</a></div>
+             
+            <div><a class="btn btn-sm btn-warning" href="{{ route('adminknowledgemanagement.edit', $netlesson->id)}}">Edit Lesson</a></div>
+             <h3>Download PDF</h3>
+              <a href="/files/{{$kmlesson->file}}" >{{$kmlesson->file}}</a>
             </div>
             <!-- /.box-body -->
           </div>

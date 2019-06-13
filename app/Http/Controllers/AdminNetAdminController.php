@@ -5,23 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\lessons;
 
-class DbmsController extends Controller
+class AdminNetAdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-        
-    }
     public function index()
     {
         //
-        $dbmslesson=lessons::all()->where('unit_id', '=', '4');
-        return view('dbms.index',compact('dbmslesson'));
+        $netlesson=lessons::all()->where('unit_id', '=', '1');
+        return view('adminnetadmin.index', compact('netlesson'));
     }
 
     /**
@@ -32,6 +31,7 @@ class DbmsController extends Controller
     public function create()
     {
         //
+         return view('adminnetadmin.create');
     }
 
     /**
@@ -54,8 +54,9 @@ class DbmsController extends Controller
     public function show($id)
     {
         //
-        $dbmslesson=lessons::find($id);
-        return view('dbms.details', compact('dbmslesson'));
+        $netlesson=lessons::find($id);
+        return view('adminnetadmin.details', compact('netlesson')); 
+
     }
 
     /**
@@ -67,6 +68,9 @@ class DbmsController extends Controller
     public function edit($id)
     {
         //
+        $netlesson=lessons::find($id);
+        return view('adminnetadmin.edit', compact('netlesson')); 
+       
     }
 
     /**
