@@ -2,6 +2,12 @@
 @section('content')
 <div class="container">
 <h2>System Administration Lessons</h2>
+@if ($message = Session::get('success'))
+                <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <p>{{$message}}</p>
+                </div>
+              @endif
 <a class="btn btn-sm btn-info" href="{{ route('adminsysadmin.create')}}">Add Lesson</a><a class="pull-right btn btn-sm btn-danger" href="{{ route('adminquicklearning')}}">Go Back</a>
 <div class="row">
 @if(count($syslesson)>0)
@@ -36,6 +42,11 @@
             <div id="def" style="display:block">{!! str_limit($syslesson->content, 300) !!} <a class="btn btn-sm btn-info" href="{{ route('adminsysadmin.show', $syslesson->id)}}">...Show More</a></div>
              
             <div><a class="btn btn-sm btn-warning" href="{{ route('adminsysadmin.edit', $syslesson->id)}}">Edit Lesson</a></div>
+            <form action="{{ route('adminsysadmin.destroy', $syslesson->id)}}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-sm btn-danger" onclick="return confirm('Delete Lesson?')" type="submit">Delete</button>
+                    </form>
             <h3>Download PDF</h3>
               <a href="/files/{{$syslesson->file}}" >{{$syslesson->file}}</a>
             </div>
