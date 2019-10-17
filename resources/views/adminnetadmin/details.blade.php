@@ -22,7 +22,11 @@
             <div id="def">{!! $netlesson->content !!}</div>
             <div id="read" style="display:none">{!! $netlesson->content!!} <a href="#" onClick="return getLess();">Show Less</a></div>
             <h3>Download PDF</h3>
+              @if(($netlesson->file) !== "")
               <a href="/files/{{$netlesson->file}}" >{{$netlesson->file}}</a>
+            @else
+              No File Have Been Uploaded!
+               @endif
               <a class="btn btn-danger btn-sm" href="{{ route('adminnetadmin.index')}}">Go Back</a>
             </div>
             <!-- /.box-body -->

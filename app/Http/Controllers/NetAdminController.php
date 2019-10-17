@@ -19,8 +19,8 @@ class NetAdminController extends Controller
     public function index()
     {
         //
-        $netlesson=lessons::all()->where('unit_id', '=', '1');
-        return view('netadmin.index', compact('netlesson'));
+        $netlessons=lessons::latest()->where('unit_id', '=', '1')->paginate(4);
+        return view('netadmin.index', compact('netlessons'))->with('i',(request()->input('page',1)-1)*4);
     }
 
     /**

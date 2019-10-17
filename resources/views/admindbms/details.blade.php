@@ -22,7 +22,11 @@
             <div id="def">{!! $dbmslesson->content !!}</div>
             <div id="read" style="display:none">{!! $dbmslesson->content!!} <a href="#" onClick="return getLess();">Show Less</a></div>
             <h3>Download PDF</h3>
+              @if(($dbmslesson->file) !== "")
               <a href="/files/{{$dbmslesson->file}}" >{{$dbmslesson->file}}</a>
+            @else
+              No File Have Been Uploaded!
+               @endif
               <p>&nbsp;</p>
               <a class="btn btn-danger btn-sm" href="{{ route('admindbms.index')}}">Go Back</a>
             </div>

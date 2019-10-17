@@ -3,6 +3,7 @@
 <div class="container">
 
 <h2>System Administration Lesson {{$syslesson->lessonNo}}</h2>
+<a class="btn btn-sm" href="javascript:void(0)">&nbsp;</a><a class="pull-right btn btn-sm btn-danger" href="{{ route('sysadmin.index')}}">Go Back</a>
 
 <div class="box box-warning box-solid">
             <div class="box-header with-border">
@@ -22,7 +23,11 @@
             <div id="def">{!! $syslesson->content !!}</div>
             <div id="read" style="display:none">{!! $syslesson->content!!} <a href="#" onClick="return getLess();">Show Less</a></div>
             <h3>Download PDF</h3>
+              @if(($syslesson->file) !== "")
               <a href="/files/{{$syslesson->file}}" >{{$syslesson->file}}</a>
+            @else
+              No File Have Been Uploaded!
+               @endif
             </div>
             <!-- /.box-body -->
           </div>

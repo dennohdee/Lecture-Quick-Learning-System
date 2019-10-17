@@ -19,8 +19,8 @@ class AdminSysAdminController extends Controller
     public function index()
     {
         //
-        $syslesson=lessons::all()->where('unit_id', '=', '2');
-        return view('adminsysadmin.index',compact('syslesson'));
+        $syslessons=lessons::latest()->where('unit_id', '=', '2')->paginate(4);
+        return view('adminsysadmin.index',compact('syslessons'))->with('i',(request()->input('page',1)-1)*4);
     }
 
     /**
@@ -44,7 +44,7 @@ class AdminSysAdminController extends Controller
     {
          //validations
         request()->validate([
-            'lessonNo' => 'required|numeric|unique:lessons,lessonNo',
+            'lessonNo' => 'required|numeric',
             'objectives' => 'required',
             'content' => 'required',
             'file' => 'required',
@@ -64,7 +64,7 @@ class AdminSysAdminController extends Controller
             $path = $request->file('file')->storeAs('public/files', $fileNameToStore);
         }
         else{
-            $fileNameToStore="NONE.docx";
+            $fileNameToStore="";
         }
         //get and insert data
         $lessons = new lessons();
@@ -91,7 +91,7 @@ class AdminSysAdminController extends Controller
     {
         //
         $syslesson=lessons::find($id);
-        return view('sysadmin.details', compact('syslesson'));
+        return view('adminsysadmin.details', compact('syslesson'));
     }
 
     /**

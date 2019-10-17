@@ -3,6 +3,7 @@
 <div class="container">
 
 <h2>Network Administration Lesson {{$netlesson->lessonNo}}</h2>
+<a class="btn btn-sm" href="javascript:void(0)">&nbsp;</a><a class="pull-right btn btn-sm btn-danger" href="{{ route('netadmin.index')}}">Go Back</a>
 
 <div class="box box-warning box-solid">
             <div class="box-header with-border">
@@ -22,7 +23,11 @@
             <div id="def">{!! $netlesson->content !!}</div>
             <div id="read" style="display:none">{!! $netlesson->content!!} <a href="#" onClick="return getLess();">Show Less</a></div>
             <h3>Download PDF</h3>
+              @if(($netlesson->file) !== "")
               <a href="/files/{{$netlesson->file}}" >{{$netlesson->file}}</a>
+            @else
+              No File Have Been Uploaded!
+               @endif
             </div>
             <!-- /.box-body -->
           </div>

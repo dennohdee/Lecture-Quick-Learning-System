@@ -19,8 +19,8 @@ class SysAdminController extends Controller
     public function index()
     {
         //
-        $syslesson=lessons::all()->where('unit_id', '=', '2');
-        return view('sysadmin.index',compact('syslesson'));
+        $syslessons=lessons::latest()->where('unit_id', '=', '2')->paginate(4);
+        return view('sysadmin.index',compact('syslessons'))->with('i',(request()->input('page',1)-1)*4);
     }
 
     /**

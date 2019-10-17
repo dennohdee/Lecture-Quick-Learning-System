@@ -2,9 +2,10 @@
 @section('content')
 <div class="container">
 <h2>Knowledge Management Lessons</h2>
+<a class="btn btn-sm" href="javascript:void(0)">&nbsp;</a><a class="pull-right btn btn-sm btn-danger" href="{{ route('quicklearning')}}">Go Back</a>
 <div class="row">
-@if(count($kmlesson)>0)
-@foreach($kmlesson as $kmlesson)
+@if(count($kmlessons)>0)
+@foreach($kmlessons as $kmlesson)
 <script type="text/javascript">
       function getAll(){
         document.getElementById('def').style.display="none";
@@ -32,10 +33,14 @@
             {!! $kmlesson->objectives!!}
             <h3>Content</h3>
             
-            <div id="def" style="display:block">{!! str_limit($kmlesson->content, 300) !!} <a href="{{ route('netadmin.show', $kmlesson->id)}}">...Show More</a></div>
+            <div id="def" style="display:block">{!! str_limit($kmlesson->content, 300) !!} <a  class="btn btn-sm btn-info" href="{{ route('knowledgemanagement.show', $kmlesson->id)}}">...Show More</a></div>
             <div id="read" style="display:none">{!! $kmlesson->content!!} <a href="#" onClick="return getLess();">...Show Less</a></div>
             <h3>Download PDF</h3>
+              @if(($kmlesson->file) !== "")
               <a href="/files/{{$kmlesson->file}}" >{{$kmlesson->file}}</a>
+            @else
+              No File Have Been Uploaded!
+               @endif
             </div>
             <!-- /.box-body -->
           </div>
@@ -46,5 +51,6 @@
       <div class="box-body">No Lessons Have Been Posted!</div>
       @endif
       </div>
+       {!! $kmlessons->links() !!}
 </div>
 @endsection

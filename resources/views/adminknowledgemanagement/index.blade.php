@@ -4,8 +4,8 @@
 <h2>Knowledge Management Lessons</h2>
 <a class="btn btn-sm btn-info" href="{{ route('adminknowledgemanagement.create')}}">Add Lesson</a><a class="pull-right btn btn-sm btn-danger" href="{{ route('adminquicklearning')}}">Go Back</a>
 <div class="row">
-@if(count($kmlesson)>0)
-@foreach($kmlesson as $kmlesson)
+@if(count($kmlessons)>0)
+@foreach($kmlessons as $kmlesson)
 <script type="text/javascript">
       function getAll(){
         document.getElementById('def').style.display="none";
@@ -34,11 +34,20 @@
             <h3>Content</h3>
             
             <div>{!! str_limit($kmlesson->content, 300) !!} 
-             <a class="btn btn-sm btn-info" class="btn btn-sm btn-info" href="{{ route('adminknowledgemanagement.show', $netlesson->id)}}">...Show More</a></div>
+             <a class="btn btn-sm btn-info" class="btn btn-sm btn-info" href="{{ route('adminknowledgemanagement.show', $kmlesson->id)}}">...Show More</a></div>
              
-            <div><a class="btn btn-sm btn-warning" href="{{ route('adminknowledgemanagement.edit', $netlesson->id)}}">Edit Lesson</a></div>
+            <div><a class="btn btn-sm btn-warning" href="{{ route('adminknowledgemanagement.edit', $kmlesson->id)}}">Edit Lesson</a></div>
+             <form action="{{ route('adminknowledgemanagement.destroy', $kmlesson->id)}}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-sm btn-danger" onclick="return confirm('Delete Lesson?')" type="submit">Delete</button>
+                    </form>
              <h3>Download PDF</h3>
+              @if(($kmlesson->file) !== "")
               <a href="/files/{{$kmlesson->file}}" >{{$kmlesson->file}}</a>
+            @else
+              No File Have Been Uploaded!
+               @endif
             </div>
             <!-- /.box-body -->
           </div>
@@ -49,5 +58,6 @@
       <div class="box-body">No Lessons Have Been Posted!</div>
       @endif
       </div>
+       {!! $kmlessons->links() !!}
 </div>
 @endsection

@@ -19,8 +19,8 @@ class AdminNetAdminController extends Controller
     public function index()
     {
         //
-        $netlesson=lessons::all()->where('unit_id', '=', '1');
-        return view('adminnetadmin.index', compact('netlesson'));
+        $netlessons=lessons::latest()->where('unit_id', '=', '1')->paginate(4);
+        return view('adminnetadmin.index', compact('netlessons'))->with('i',(request()->input('page',1)-1)*4);
     }
 
     /**
@@ -45,7 +45,7 @@ class AdminNetAdminController extends Controller
     {
         //validations
         request()->validate([
-            'lessonNo' => 'required|numeric|unique:lessons,lessonNo',
+            'lessonNo' => 'required|numeric',
             'objectives' => 'required',
             'content' => 'required',
             'file' => 'required',

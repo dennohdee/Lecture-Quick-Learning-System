@@ -4,8 +4,8 @@
 <h2>DBMS Lessons</h2>
 <a class="btn btn-sm btn-info" href="{{ route('admindbms.create')}}">Add Lesson</a><a class="pull-right btn btn-sm btn-danger" href="{{ route('adminquicklearning')}}">Go Back</a>
 <div class="row">
-@if(count($dbmslesson)>0)
-@foreach($dbmslesson as $dbmslesson)
+@if(count($dbmslessons)>0)
+@foreach($dbmslessons as $dbmslesson)
 <script type="text/javascript">
       function getAll(){
         document.getElementById('def').style.display="none";
@@ -33,11 +33,15 @@
             {!! $dbmslesson->objectives!!}
             <h3>Content</h3>
             
-            <div>{!! str_limit($dbmslesson->content, 300) !!} <a class="btn btn-sm btn-info" href="{{ route('admindbms.show', $netlesson->id)}}">...Show More</a></div>
+            <div>{!! str_limit($dbmslesson->content, 300) !!} <a class="btn btn-sm btn-info" href="{{ route('admindbms.show', $dbmslesson->id)}}">...Show More</a></div>
              
-            <div><a class="btn btn-sm btn-warning" href="{{ route('admindbms.edit', $netlesson->id)}}">Edit Lesson</a></div>
+            <div><a class="btn btn-sm btn-warning" href="{{ route('admindbms.edit', $dbmslesson->id)}}">Edit Lesson</a></div>
             <h3>Download PDF</h3>
+              @if(($dbmslesson->file) !== "")
               <a href="/files/{{$dbmslesson->file}}" >{{$dbmslesson->file}}</a>
+            @else
+              No File Have Been Uploaded!
+               @endif
             </div>
             <!-- /.box-body -->
           </div>
@@ -47,6 +51,7 @@
       @else
       <div class="box-body">No Lessons Have Been Posted!</div>
       @endif
-      </div>
+      
+      </div>{!! $dbmslessons->links() !!}
 </div>
 @endsection

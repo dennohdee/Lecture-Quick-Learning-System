@@ -36,7 +36,7 @@
     <nav class="navbar navbar-static-top" style="background:#2349b2">
       <div class="container">
         <div class="navbar-header">
-          <a href="/" class="navbar-brand"><b>SCAI</b>QL</a>
+          <a href="{{route ('admin')}}" class="navbar-brand"><b>SCAI</b>QL</a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>

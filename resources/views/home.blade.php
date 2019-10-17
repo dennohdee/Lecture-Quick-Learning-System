@@ -12,8 +12,9 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    You are logged in!
+                    <div class="panel-body">
+                        You are logged in as student!
+                    </div>
                 </div>
             </div>
         </div>

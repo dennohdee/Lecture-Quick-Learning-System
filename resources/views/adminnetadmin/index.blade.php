@@ -10,9 +10,9 @@
               @endif
 <a class="btn btn-sm btn-info" href="{{ route('adminnetadmin.create')}}">Add Lesson</a><a class="pull-right btn btn-sm btn-danger" href="{{ route('adminquicklearning')}}">Go Back</a>
 <div class="row">
-@if(count($netlesson)>0)
+@if(count($netlessons)>0)
 
-@foreach($netlesson as $netlesson)
+@foreach($netlessons as $netlesson)
 <script type="text/javascript">
       function getAll(){
         document.getElementById('def').style.display="none";
@@ -49,7 +49,11 @@
                     <button class="btn btn-sm btn-danger" onclick="return confirm('Delete Lesson?')" type="submit">Delete</button>
                     </form>
             <h3>Download PDF</h3>
-              <a href="/public/files/{{$netlesson->file}}" >{{$netlesson->file}}</a>
+            @if(($netlesson->file) !== "")
+              <a href="/files/{{$netlesson->file}}" >{{$netlesson->file}}</a>
+            @else
+              No File Have Been Uploaded!
+               @endif
             </div>
             <!-- /.box-body -->
           </div>
@@ -59,6 +63,8 @@
       @else
       <div class="box-body">No Lessons Have Been Posted!</div>
       @endif
+      
       </div>
+      {!! $netlessons->links() !!}
 </div>
 @endsection

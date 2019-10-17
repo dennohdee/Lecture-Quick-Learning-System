@@ -20,8 +20,8 @@ class DbmsController extends Controller
     public function index()
     {
         //
-        $dbmslesson=lessons::all()->where('unit_id', '=', '4');
-        return view('dbms.index',compact('dbmslesson'));
+        $dbmslessons=lessons::latest()->where('unit_id', '=', '4')->paginate(4);
+        return view('dbms.index',compact('dbmslessons'))->with('i',(request()->input('page',1)-1)*4);
     }
 
     /**

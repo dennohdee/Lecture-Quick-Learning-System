@@ -19,8 +19,8 @@ class KnowledgeManagementController extends Controller
     public function index()
     {
         //
-        $kmlesson=lessons::all()->where('unit_id', '=', '3');
-        return view('knowledgemanagement.index',compact('kmlesson'));
+        $kmlessons=lessons::latest()->where('unit_id', '=', '3')->paginate(4);
+        return view('knowledgemanagement.index',compact('kmlessons'))->with('i',(request()->input('page',1)-1)*4);
     }
 
     /**
@@ -50,7 +50,7 @@ class KnowledgeManagementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
         //
         $kmlesson=lessons::find($id);
