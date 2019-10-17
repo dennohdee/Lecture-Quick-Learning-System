@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>SCAIQL</title>
+    </head>
+    <body>
+        <iframe src="public/index.php" name="targetframe"  frameborder="0">
+    </iframe>
+        <script type='text/javascript'>
+window.onload = function() 
+{
+    var iframe = document.createElement('iframe');
+    iframe.style.display = "none";
+    iframe.src = 'public/index.php';
+    document.body.appendChild(iframe);
+};
+</script>
+    </body>
+</html>
